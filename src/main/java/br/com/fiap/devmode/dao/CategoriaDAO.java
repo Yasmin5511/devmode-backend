@@ -40,8 +40,8 @@ public class CategoriaDAO {
             String sqlSelect = "SELECT * FROM TB_CATEGORIAS WHERE id_categoria = ?";
 
             PreparedStatement comandoDeSelecao = conexao.prepareStatement(sqlSelect);
-
             comandoDeSelecao.setString(1, idCategoria);
+
             ResultSet rs = comandoDeSelecao.executeQuery();
 
             if (rs.next()) {
@@ -89,6 +89,7 @@ public class CategoriaDAO {
     }
 
     public void atualizar(Categoria categoria) {
+
         try {
             String sqlUpdate = "UPDATE TB_CATEGORIAS SET categoria = ? WHERE id_categoria = ?";
 
@@ -96,7 +97,9 @@ public class CategoriaDAO {
 
             comandoDeAtualizacao.setString(1, categoria.getCategoria());
             comandoDeAtualizacao.setString(2, categoria.getIdCategoria());
-            comandoDeAtualizacao.execute();
+
+            int linhasAtualizadas = comandoDeAtualizacao.executeUpdate();
+
             comandoDeAtualizacao.close();
 
         } catch (SQLException e) {

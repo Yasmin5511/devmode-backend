@@ -82,6 +82,13 @@ public class UsuarioAcaoStatusService {
                 throw new IllegalArgumentException("Missão não encontrada.");
             }
 
+
+            UsuarioAvatarService avatarService = new UsuarioAvatarService();
+
+            if (avatarService.buscarPorUsuario(idUsuario) == null) {
+                throw new IllegalArgumentException("Avatar não encontrado.");
+            }
+
             String statusAnterior = missao.getStatus();
 
             boolean atualizado = missao.atualizarProgresso(quantidade);
@@ -110,15 +117,12 @@ public class UsuarioAcaoStatusService {
                     usuario.adicionarPontos(acao.getPontosGanhos());
                     usuarioDAO.atualizar(usuario);
 
-                    UsuarioAvatarService avatarService = new UsuarioAvatarService();
                     avatarService.atualizarNivel(idUsuario);
 
                 } finally {
                     usuarioDAO.desconectar();
                 }
             }
-
-            UsuarioAvatarService avatarService = new UsuarioAvatarService();
 
             if ("CONCLUIDA".equals(missao.getStatus())) {
                 avatarService.atualizarHumor(idUsuario, "CELEBRANDO");

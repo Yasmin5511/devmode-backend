@@ -15,6 +15,7 @@ public class UsuarioDAO implements RepositorioUsuario {
         this.conexao = new ConnectionFactory().getConnection();
     }
 
+
     @Override
     public void adicionar(Usuario usuario) {
         try {

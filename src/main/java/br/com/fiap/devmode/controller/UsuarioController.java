@@ -23,17 +23,19 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService = new UsuarioService();
 
+
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> buscarPorId(@PathVariable String id) {
 
-            Usuario usuario = usuarioService.buscarPorId(id);
+        Usuario usuario = usuarioService.buscarPorId(id);
 
-            if (usuario == null) {
-                return ResponseEntity.notFound().build();
-            }
+        if (usuario == null) {
+            return ResponseEntity.notFound().build();
+        }
 
-            return ResponseEntity.ok(usuario);
+        return ResponseEntity.ok(usuario);
     }
+
 
     @GetMapping
     public ResponseEntity<ArrayList<Usuario>> listarTodos() {
@@ -190,17 +192,6 @@ public class UsuarioController {
         }
 
         return ResponseEntity.ok(avatar);
-    }
-
-
-    @PostMapping("/{id}/avatar")
-    public ResponseEntity<Void> criarAvatar(
-            @PathVariable String id) {
-
-        UsuarioAvatarService avatarService = new UsuarioAvatarService();
-        avatarService.criarAvatar(id);
-
-        return ResponseEntity.status(201).build();
     }
 
 

@@ -60,17 +60,4 @@ public class UsuarioAcaoStatus {
         return true;
     }
 
-    public boolean concluirMissao() {
-
-        if (progressoAtual >= progressoTotal) {
-            progressoAtual = progressoTotal;
-            status = "CONCLUIDA";
-            dataAtualizacao = LocalDate.now();
-
-            return true;
-        }
-
-        return false;
-    }
-
 }

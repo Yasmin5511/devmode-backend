@@ -1,10 +1,13 @@
 package br.com.fiap.devmode.servico;
 
+import br.com.fiap.devmode.dao.NivelAvatarDAO;
+import br.com.fiap.devmode.dao.UsuarioAvatarDAO;
 import br.com.fiap.devmode.dao.UsuarioDAO;
 import br.com.fiap.devmode.modelo.Categoria;
 import br.com.fiap.devmode.modelo.Usuario;
 import br.com.fiap.devmode.repositorio.RepositorioUsuario;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -30,19 +33,31 @@ public class UsuarioService {
         }
     }
 
+
     public void cadastrar(Usuario usuario) {
         validarUsuario(usuario);
 
-        if (usuario.getIdUsuario() == null ||
-                usuario.getIdUsuario().isBlank()) {
-            throw new IllegalArgumentException(
-                    "O ID do usuário é obrigatório."
-            );
+        if (usuario.getIdUsuario() == null || usuario.getIdUsuario().isBlank()) {
+            throw new IllegalArgumentException("O ID do usuário é obrigatório.");
+        }
+
+        NivelAvatarDAO nivelDAO = new NivelAvatarDAO();
+
+        try {
+            if (nivelDAO.buscarPorId(1) == null) {
+                throw new IllegalStateException(
+                        "O nível inicial do avatar não está cadastrado."
+                );
+            }
+        } finally {
+            nivelDAO.desconectar();
         }
 
         if (usuario.getDataCriacao() == null) {
             usuario.setDataCriacao(LocalDate.now());
         }
+
+        usuario.setTotalPontosSustentaveis(0);
 
         UsuarioDAO dao = new UsuarioDAO();
 
@@ -52,9 +67,9 @@ public class UsuarioService {
             dao.desconectar();
         }
 
-        UsuarioAvatarService avatarService = new UsuarioAvatarService();
-        avatarService.criarAvatar(usuario.getIdUsuario());
+        new UsuarioAvatarService().criarAvatar(usuario.getIdUsuario());
     }
+
 
     public boolean atualizar(String id, Usuario usuario) {
         validarUsuario(usuario);
@@ -69,9 +84,15 @@ public class UsuarioService {
             }
 
             usuario.setIdUsuario(id);
+
+            usuario.setTotalPontosSustentaveis(
+                    usuarioExistente.getTotalPontosSustentaveis()
+            );
+
             dao.atualizar(usuario);
 
             return true;
+
         } finally {
             dao.desconectar();
         }
@@ -135,6 +156,12 @@ public class UsuarioService {
                 usuario.getNome().isBlank()) {
             throw new IllegalArgumentException(
                     "O nome é obrigatório."
+            );
+        }
+
+        if (usuario.getTotalPontosSustentaveis() < 0) {
+            throw new IllegalArgumentException(
+                    "A pontuação do usuário não pode ser negativa."
             );
         }
 
