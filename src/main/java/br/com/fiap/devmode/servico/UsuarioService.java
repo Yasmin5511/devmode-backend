@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class UsuarioService {
 
-    public Usuario buscarPorId(String id) {
+    public Usuario buscarPorId(Integer id) {
         UsuarioDAO dao = new UsuarioDAO();
 
         try {
@@ -37,7 +37,7 @@ public class UsuarioService {
     public void cadastrar(Usuario usuario) {
         validarUsuario(usuario);
 
-        if (usuario.getIdUsuario() == null || usuario.getIdUsuario().isBlank()) {
+        if (usuario.getIdUsuario() == null) {
             throw new IllegalArgumentException("O ID do usuário é obrigatório.");
         }
 
@@ -71,7 +71,7 @@ public class UsuarioService {
     }
 
 
-    public boolean atualizar(String id, Usuario usuario) {
+    public boolean atualizar(Integer id, Usuario usuario) {
         validarUsuario(usuario);
 
         UsuarioDAO dao = new UsuarioDAO();
@@ -98,7 +98,7 @@ public class UsuarioService {
         }
     }
 
-    public boolean remover(String id) {
+    public boolean remover(Integer id) {
         UsuarioDAO dao = new UsuarioDAO();
 
         try {
@@ -115,7 +115,7 @@ public class UsuarioService {
         }
     }
 
-    public void adicionarCategoria(String idUsuario, String idCategoria) {
+    public void adicionarCategoria(Integer idUsuario, Integer idCategoria) {
         UsuarioDAO dao = new UsuarioDAO();
 
         try {
@@ -125,7 +125,7 @@ public class UsuarioService {
         }
     }
 
-    public ArrayList<Categoria> buscarCategorias(String idUsuario) {
+    public ArrayList<Categoria> buscarCategorias(Integer idUsuario) {
         UsuarioDAO dao = new UsuarioDAO();
 
         try {
@@ -135,7 +135,7 @@ public class UsuarioService {
         }
     }
 
-    public void removerCategoria(String idUsuario, String idCategoria) {
+    public void removerCategoria(Integer idUsuario, Integer idCategoria) {
         UsuarioDAO dao = new UsuarioDAO();
 
         try {

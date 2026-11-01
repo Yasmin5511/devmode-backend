@@ -21,7 +21,7 @@ public class AcaoSustentavelController {
 
     @GetMapping("/{id}")
     public ResponseEntity<AcaoSustentavel> buscarPorId(
-            @PathVariable String id) {
+            @PathVariable Integer id) {
 
         AcaoSustentavel acao = acaoService.buscarPorId(id);
 
@@ -43,7 +43,7 @@ public class AcaoSustentavelController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> atualizar(
-            @PathVariable String id,
+            @PathVariable Integer id,
             @RequestBody AcaoSustentavel acao) {
 
         acao.setIdAcao(id);
@@ -59,7 +59,7 @@ public class AcaoSustentavelController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(
-            @PathVariable String id) {
+            @PathVariable Integer id) {
 
         boolean removido = acaoService.remover(id);
 

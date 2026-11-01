@@ -23,7 +23,7 @@ public class UsuarioDAO implements RepositorioUsuario {
 
             PreparedStatement comandoDeInsercao = conexao.prepareStatement(sqlInsert);
 
-            comandoDeInsercao.setString(1, usuario.getIdUsuario());
+            comandoDeInsercao.setInt(1, usuario.getIdUsuario());
             comandoDeInsercao.setString(2, usuario.getCpf());
             comandoDeInsercao.setString(3, usuario.getEmail());
             comandoDeInsercao.setString(4, usuario.getNome());
@@ -48,7 +48,7 @@ public class UsuarioDAO implements RepositorioUsuario {
     }
 
     @Override
-    public void remover(String idUsuario) {
+    public void remover(Integer idUsuario) {
         try {
             conexao.setAutoCommit(false);
 
@@ -75,7 +75,7 @@ public class UsuarioDAO implements RepositorioUsuario {
 
             for (String sql : comandos) {
                 try (PreparedStatement comando = conexao.prepareStatement(sql)) {
-                    comando.setString(1, idUsuario);
+                    comando.setInt(1, idUsuario);
                     comando.executeUpdate();
                 }
             }
@@ -101,7 +101,7 @@ public class UsuarioDAO implements RepositorioUsuario {
     }
 
     @Override
-    public Usuario buscarPorId(String idUsuario) {
+    public Usuario buscarPorId(Integer idUsuario) {
 
         Usuario usuario = null;
 
@@ -109,14 +109,14 @@ public class UsuarioDAO implements RepositorioUsuario {
             String sqlSelect = "SELECT * FROM TB_USUARIO WHERE id_usuario = ?";
 
             PreparedStatement comandoDeSelecao = conexao.prepareStatement(sqlSelect);
-            comandoDeSelecao.setString(1, idUsuario);
+            comandoDeSelecao.setInt(1, idUsuario);
 
             ResultSet rs = comandoDeSelecao.executeQuery();
 
             if (rs.next()) {
 
                 usuario = new Usuario();
-                usuario.setIdUsuario(rs.getString("id_usuario"));
+                usuario.setIdUsuario(rs.getInt("id_usuario"));
                 usuario.setCpf(rs.getString("cpf"));
                 usuario.setEmail(rs.getString("email"));
                 usuario.setNome(rs.getString("nome"));
@@ -149,7 +149,7 @@ public class UsuarioDAO implements RepositorioUsuario {
             while (rs.next()) {
 
                 Usuario usuario = new Usuario();
-                usuario.setIdUsuario(rs.getString("id_usuario"));
+                usuario.setIdUsuario(rs.getInt("id_usuario"));
                 usuario.setCpf(rs.getString("cpf"));
                 usuario.setEmail(rs.getString("email"));
                 usuario.setNome(rs.getString("nome"));
@@ -182,7 +182,7 @@ public class UsuarioDAO implements RepositorioUsuario {
             comandoDeAtualizacao.setString(3, usuario.getNome());
             comandoDeAtualizacao.setString(4, usuario.getSobrenome());
             comandoDeAtualizacao.setInt(5, usuario.getTotalPontosSustentaveis());
-            comandoDeAtualizacao.setString(6, usuario.getIdUsuario());
+            comandoDeAtualizacao.setInt(6, usuario.getIdUsuario());
 
             comandoDeAtualizacao.execute();
             comandoDeAtualizacao.close();
@@ -202,14 +202,14 @@ public class UsuarioDAO implements RepositorioUsuario {
     }
 
     @Override
-    public void adicionarCategoria(String idUsuario, String idCategoria) {
+    public void adicionarCategoria(Integer idUsuario, Integer idCategoria) {
         try {
             String sqlInsert = "INSERT INTO TB_USUARIO_CATEGORIA (tb_usuario_id_usuario, tb_categorias_id_categoria, preferencia, dt_selecao) VALUES (?, ?, ?, SYSDATE)";
 
             PreparedStatement comandoDeInsercao = conexao.prepareStatement(sqlInsert);
 
-            comandoDeInsercao.setString(1, idUsuario);
-            comandoDeInsercao.setString(2, idCategoria);
+            comandoDeInsercao.setInt(1, idUsuario);
+            comandoDeInsercao.setInt(2, idCategoria);
             comandoDeInsercao.setString(3, "S");
 
             comandoDeInsercao.execute();
@@ -221,14 +221,14 @@ public class UsuarioDAO implements RepositorioUsuario {
     }
 
     @Override
-    public void removerCategoria(String idUsuario, String idCategoria) {
+    public void removerCategoria(Integer idUsuario, Integer idCategoria) {
         try {
             String sqlDelete = "DELETE FROM TB_USUARIO_CATEGORIA WHERE tb_usuario_id_usuario = ? AND tb_categorias_id_categoria = ?";
 
             PreparedStatement comandoDeRemocao = conexao.prepareStatement(sqlDelete);
 
-            comandoDeRemocao.setString(1, idUsuario);
-            comandoDeRemocao.setString(2, idCategoria);
+            comandoDeRemocao.setInt(1, idUsuario);
+            comandoDeRemocao.setInt(2, idCategoria);
 
             comandoDeRemocao.execute();
             comandoDeRemocao.close();
@@ -239,7 +239,7 @@ public class UsuarioDAO implements RepositorioUsuario {
     }
 
     @Override
-    public ArrayList<Categoria> buscarCategorias(String idUsuario) {
+    public ArrayList<Categoria> buscarCategorias(Integer idUsuario) {
 
         ArrayList<Categoria> categorias = new ArrayList<>();
 
@@ -254,13 +254,13 @@ public class UsuarioDAO implements RepositorioUsuario {
 
             PreparedStatement comandoDeSelecao = conexao.prepareStatement(sqlSelect);
 
-            comandoDeSelecao.setString(1, idUsuario);
+            comandoDeSelecao.setInt(1, idUsuario);
             ResultSet rs = comandoDeSelecao.executeQuery();
 
             while (rs.next()) {
 
                 Categoria categoria = new Categoria();
-                categoria.setIdCategoria(rs.getString("id_categoria"));
+                categoria.setIdCategoria(rs.getInt("id_categoria"));
                 categoria.setCategoria(rs.getString("categoria"));
                 categorias.add(categoria);
             }
@@ -287,7 +287,7 @@ public class UsuarioDAO implements RepositorioUsuario {
         try (PreparedStatement comando = conexao.prepareStatement(sql)) {
 
             comando.setInt(1, usuario.getTotalPontosSustentaveis());
-            comando.setString(2, usuario.getIdUsuario());
+            comando.setInt(2, usuario.getIdUsuario());
             comando.executeUpdate();
 
         } catch (SQLException e) {

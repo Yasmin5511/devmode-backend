@@ -1,7 +1,7 @@
 package br.com.fiap.devmode.modelo;
 
 public class AcaoSustentavel extends ItemSustentavel{
-    private String idAcao;
+    private Integer idAcao;
     private String descricao;
     private double co2EvitadoKg;
     private String nivelDificuldade;
@@ -10,7 +10,7 @@ public class AcaoSustentavel extends ItemSustentavel{
     }
 
     public AcaoSustentavel(
-            String idAcao,
+            Integer idAcao,
             String titulo,
             Categoria categoria,
             String descricao,
@@ -26,8 +26,8 @@ public class AcaoSustentavel extends ItemSustentavel{
         this.co2EvitadoKg = co2EvitadoKg;
         this.nivelDificuldade = nivelDificuldade;
     }
-    public String getIdAcao() {return idAcao;}
-    public void setIdAcao(String idAcao) {this.idAcao = idAcao;}
+    public Integer getIdAcao() {return idAcao;}
+    public void setIdAcao(Integer idAcao) {this.idAcao = idAcao;}
     public String getDescricao() {return descricao;}
     public void setDescricao(String descricao) {this.descricao = descricao;}
     public double getCo2EvitadoKg() {return co2EvitadoKg;}

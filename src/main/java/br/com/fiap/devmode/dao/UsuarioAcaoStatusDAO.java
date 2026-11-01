@@ -20,8 +20,8 @@ public class UsuarioAcaoStatusDAO {
             String sqlInsert = "INSERT INTO TB_USUARIO_ACAO_STATUS (tb_acoes_sustentaveis_id_acao, tb_usuario_id_usuario, status, progresso_atual, progresso_total, dt_atualizacao) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement comandoDeInsercao = conexao.prepareStatement(sqlInsert);
 
-            comandoDeInsercao.setString(1, usuarioAcaoStatus.getAcao().getIdAcao());
-            comandoDeInsercao.setString(2, usuarioAcaoStatus.getUsuario().getIdUsuario());
+            comandoDeInsercao.setInt(1, usuarioAcaoStatus.getAcao().getIdAcao());
+            comandoDeInsercao.setInt(2, usuarioAcaoStatus.getUsuario().getIdUsuario());
             comandoDeInsercao.setString(3, usuarioAcaoStatus.getStatus());
             comandoDeInsercao.setInt(4, usuarioAcaoStatus.getProgressoAtual());
             comandoDeInsercao.setInt(5, usuarioAcaoStatus.getProgressoTotal());
@@ -35,7 +35,7 @@ public class UsuarioAcaoStatusDAO {
         }
     }
 
-    public UsuarioAcaoStatus buscarPorId(String idAcao, String idUsuario) {
+    public UsuarioAcaoStatus buscarPorId(Integer idAcao, Integer idUsuario) {
 
         UsuarioAcaoStatus usuarioAcaoStatus = null;
 
@@ -43,18 +43,18 @@ public class UsuarioAcaoStatusDAO {
             String sqlSelect = "SELECT * FROM TB_USUARIO_ACAO_STATUS WHERE tb_acoes_sustentaveis_id_acao = ? AND tb_usuario_id_usuario = ?";
             PreparedStatement comandoDeSelecao = conexao.prepareStatement(sqlSelect);
 
-            comandoDeSelecao.setString(1, idAcao);
-            comandoDeSelecao.setString(2, idUsuario);
+            comandoDeSelecao.setInt(1, idAcao);
+            comandoDeSelecao.setInt(2, idUsuario);
 
             ResultSet rs = comandoDeSelecao.executeQuery();
 
             if (rs.next()) {
 
                 AcaoSustentavel acao = new AcaoSustentavel();
-                acao.setIdAcao(rs.getString("tb_acoes_sustentaveis_id_acao"));
+                acao.setIdAcao(rs.getInt("tb_acoes_sustentaveis_id_acao"));
 
                 Usuario usuario = new Usuario();
-                usuario.setIdUsuario(rs.getString("tb_usuario_id_usuario"));
+                usuario.setIdUsuario(rs.getInt("tb_usuario_id_usuario"));
 
                 usuarioAcaoStatus = new UsuarioAcaoStatus();
                 usuarioAcaoStatus.setAcao(acao);
@@ -89,10 +89,10 @@ public class UsuarioAcaoStatusDAO {
             while (rs.next()) {
 
                 AcaoSustentavel acao = new AcaoSustentavel();
-                acao.setIdAcao(rs.getString("tb_acoes_sustentaveis_id_acao"));
+                acao.setIdAcao(rs.getInt("tb_acoes_sustentaveis_id_acao"));
 
                 Usuario usuario = new Usuario();
-                usuario.setIdUsuario(rs.getString("tb_usuario_id_usuario"));
+                usuario.setIdUsuario(rs.getInt("tb_usuario_id_usuario"));
 
                 UsuarioAcaoStatus usuarioAcaoStatus = new UsuarioAcaoStatus();
                 usuarioAcaoStatus.setAcao(acao);
@@ -126,8 +126,8 @@ public class UsuarioAcaoStatusDAO {
             comandoDeAtualizacao.setInt(2, usuarioAcaoStatus.getProgressoAtual());
             comandoDeAtualizacao.setInt(3, usuarioAcaoStatus.getProgressoTotal());
             comandoDeAtualizacao.setDate(4, Date.valueOf(usuarioAcaoStatus.getDataAtualizacao()));
-            comandoDeAtualizacao.setString(5, usuarioAcaoStatus.getAcao().getIdAcao());
-            comandoDeAtualizacao.setString(6, usuarioAcaoStatus.getUsuario().getIdUsuario());
+            comandoDeAtualizacao.setInt(5, usuarioAcaoStatus.getAcao().getIdAcao());
+            comandoDeAtualizacao.setInt(6, usuarioAcaoStatus.getUsuario().getIdUsuario());
 
             comandoDeAtualizacao.execute();
             comandoDeAtualizacao.close();
@@ -137,13 +137,13 @@ public class UsuarioAcaoStatusDAO {
         }
     }
 
-    public void remover(String idAcao, String idUsuario) {
+    public void remover(Integer idAcao, Integer idUsuario) {
         try {
             String sqlDelete = "DELETE FROM TB_USUARIO_ACAO_STATUS WHERE tb_acoes_sustentaveis_id_acao = ? AND tb_usuario_id_usuario = ?";
 
             PreparedStatement comandoDeRemocao = conexao.prepareStatement(sqlDelete);
-            comandoDeRemocao.setString(1, idAcao);
-            comandoDeRemocao.setString(2, idUsuario);
+            comandoDeRemocao.setInt(1, idAcao);
+            comandoDeRemocao.setInt(2, idUsuario);
 
             comandoDeRemocao.execute();
             comandoDeRemocao.close();

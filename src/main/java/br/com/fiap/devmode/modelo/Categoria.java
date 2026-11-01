@@ -1,22 +1,22 @@
 package br.com.fiap.devmode.modelo;
 
 public class Categoria {
-    private String idCategoria;
+    private Integer idCategoria;
     private String categoria;
 
     public Categoria() {
     }
 
-    public Categoria(String idCategoria, String categoria) {
+    public Categoria(Integer idCategoria, String categoria) {
         this.idCategoria = idCategoria;
         this.categoria = categoria;
     }
 
-    public String getIdCategoria() {
+    public Integer getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdCategoria(String idCategoria) {
+    public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
 

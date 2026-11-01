@@ -15,7 +15,7 @@ import java.util.List;
 
 public class UsuarioAcaoStatusService {
 
-    public void iniciarMissao(String idUsuario, String idAcao, int progressoTotal) {
+    public void iniciarMissao(Integer idUsuario, Integer idAcao, int progressoTotal) {
 
         UsuarioService usuarioService = new UsuarioService();
         AcaoSustentavelService acaoService = new AcaoSustentavelService();
@@ -56,7 +56,7 @@ public class UsuarioAcaoStatusService {
     }
 
 
-    public UsuarioAcaoStatus buscarMissao(String idUsuario, String idAcao) {
+    public UsuarioAcaoStatus buscarMissao(Integer idUsuario, Integer idAcao) {
 
         UsuarioAcaoStatusDAO statusDAO = new UsuarioAcaoStatusDAO();
 
@@ -71,7 +71,7 @@ public class UsuarioAcaoStatusService {
 
 
 
-    public void atualizarProgresso(String idUsuario, String idAcao, int quantidade) {
+    public void atualizarProgresso(Integer idUsuario, Integer idAcao, int quantidade) {
 
         UsuarioAcaoStatusDAO statusDAO = new UsuarioAcaoStatusDAO();
 
@@ -139,7 +139,7 @@ public class UsuarioAcaoStatusService {
 
 
 
-    public List<UsuarioAcaoStatus> listarMissoes(String idUsuario) {
+    public List<UsuarioAcaoStatus> listarMissoes(Integer idUsuario) {
 
         UsuarioAcaoStatusDAO statusDAO = new UsuarioAcaoStatusDAO();
 

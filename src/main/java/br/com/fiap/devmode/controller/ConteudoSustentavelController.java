@@ -21,7 +21,7 @@ public class ConteudoSustentavelController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ConteudoSustentavel> buscarPorId(
-            @PathVariable String id) {
+            @PathVariable Integer id) {
 
         ConteudoSustentavel conteudo = conteudoService.buscarPorId(id);
 
@@ -43,7 +43,7 @@ public class ConteudoSustentavelController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> atualizar(
-            @PathVariable String id,
+            @PathVariable Integer id,
             @RequestBody ConteudoSustentavel conteudo) {
 
         conteudo.setIdConteudo(id);
@@ -59,7 +59,7 @@ public class ConteudoSustentavelController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(
-            @PathVariable String id) {
+            @PathVariable Integer id) {
 
         boolean removido = conteudoService.remover(id);
 

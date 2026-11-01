@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class CategoriaService {
 
-    public Categoria buscarPorId(String id) {
+    public Categoria buscarPorId(Integer id) {
         CategoriaDAO dao = new CategoriaDAO();
 
         try {
@@ -39,7 +39,7 @@ public class CategoriaService {
         }
     }
 
-    public boolean atualizar(String id, Categoria categoria) {
+    public boolean atualizar(Integer id, Categoria categoria) {
         validarCategoria(categoria);
 
         CategoriaDAO dao = new CategoriaDAO();
@@ -58,7 +58,7 @@ public class CategoriaService {
         }
     }
 
-    public boolean remover(String id) {
+    public boolean remover(Integer id) {
         CategoriaDAO dao = new CategoriaDAO();
 
         try {
@@ -80,15 +80,13 @@ public class CategoriaService {
             );
         }
 
-        if (categoria.getIdCategoria() == null ||
-                categoria.getIdCategoria().isBlank()) {
+        if (categoria.getIdCategoria() == null) {
             throw new IllegalArgumentException(
                     "O ID da categoria é obrigatório."
             );
         }
 
-        if (categoria.getCategoria() == null ||
-                categoria.getCategoria().isBlank()) {
+        if (categoria.getCategoria() == null) {
             throw new IllegalArgumentException(
                     "O nome da categoria é obrigatório."
             );

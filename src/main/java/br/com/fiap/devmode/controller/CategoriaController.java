@@ -16,7 +16,7 @@ public class CategoriaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Categoria> buscarPorId(
-            @PathVariable String id) {
+            @PathVariable Integer id) {
 
         Categoria categoria = categoriaService.buscarPorId(id);
 
@@ -43,7 +43,7 @@ public class CategoriaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> atualizar(
-            @PathVariable String id,
+            @PathVariable Integer id,
             @RequestBody Categoria categoria) {
 
         categoria.setIdCategoria(id);
@@ -59,7 +59,7 @@ public class CategoriaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(
-            @PathVariable String id) {
+            @PathVariable Integer id) {
 
         boolean removido = categoriaService.remover(id);
 

@@ -22,7 +22,7 @@ public class CategoriaDAO {
 
             PreparedStatement comandoDeInsercao = conexao.prepareStatement(sqlInsert);
 
-            comandoDeInsercao.setString(1, categoria.getIdCategoria());
+            comandoDeInsercao.setInt(1, categoria.getIdCategoria());
             comandoDeInsercao.setString(2, categoria.getCategoria());
             comandoDeInsercao.execute();
             comandoDeInsercao.close();
@@ -32,7 +32,7 @@ public class CategoriaDAO {
         }
     }
 
-    public Categoria buscarPorId(String idCategoria) {
+    public Categoria buscarPorId(Integer idCategoria) {
 
         Categoria categoria = null;
 
@@ -40,13 +40,13 @@ public class CategoriaDAO {
             String sqlSelect = "SELECT * FROM TB_CATEGORIAS WHERE id_categoria = ?";
 
             PreparedStatement comandoDeSelecao = conexao.prepareStatement(sqlSelect);
-            comandoDeSelecao.setString(1, idCategoria);
+            comandoDeSelecao.setInt(1, idCategoria);
 
             ResultSet rs = comandoDeSelecao.executeQuery();
 
             if (rs.next()) {
                 categoria = new Categoria();
-                categoria.setIdCategoria(rs.getString("id_categoria"));
+                categoria.setIdCategoria(rs.getInt("id_categoria"));
                 categoria.setCategoria(rs.getString("categoria"));
             }
 
@@ -72,7 +72,7 @@ public class CategoriaDAO {
 
             while (rs.next()) {
                 Categoria categoria = new Categoria();
-                categoria.setIdCategoria(rs.getString("id_categoria"));
+                categoria.setIdCategoria(rs.getInt("id_categoria"));
                 categoria.setCategoria(rs.getString("categoria"));
 
                 categorias.add(categoria);
@@ -96,7 +96,7 @@ public class CategoriaDAO {
             PreparedStatement comandoDeAtualizacao = conexao.prepareStatement(sqlUpdate);
 
             comandoDeAtualizacao.setString(1, categoria.getCategoria());
-            comandoDeAtualizacao.setString(2, categoria.getIdCategoria());
+            comandoDeAtualizacao.setInt(2, categoria.getIdCategoria());
 
             int linhasAtualizadas = comandoDeAtualizacao.executeUpdate();
 
@@ -107,12 +107,12 @@ public class CategoriaDAO {
         }
     }
 
-    public void remover(String idCategoria) {
+    public void remover(Integer idCategoria) {
         try {
             String sqlDelete = "DELETE FROM TB_CATEGORIAS WHERE id_categoria = ?";
 
             PreparedStatement comandoDeRemocao = conexao.prepareStatement(sqlDelete);
-            comandoDeRemocao.setString(1, idCategoria);
+            comandoDeRemocao.setInt(1, idCategoria);
             comandoDeRemocao.execute();
             comandoDeRemocao.close();
 

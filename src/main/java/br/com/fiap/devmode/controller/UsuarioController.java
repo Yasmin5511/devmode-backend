@@ -25,7 +25,7 @@ public class UsuarioController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscarPorId(@PathVariable String id) {
+    public ResponseEntity<Usuario> buscarPorId(@PathVariable Integer id) {
 
         Usuario usuario = usuarioService.buscarPorId(id);
 
@@ -55,7 +55,7 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> atualizar(
-            @PathVariable String id,
+            @PathVariable Integer id,
             @RequestBody Usuario usuario) {
 
         boolean atualizado = usuarioService.atualizar(id, usuario);
@@ -69,7 +69,7 @@ public class UsuarioController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable String id) {
+    public ResponseEntity<Void> remover(@PathVariable Integer id) {
 
         boolean removido = usuarioService.remover(id);
 
@@ -82,8 +82,8 @@ public class UsuarioController {
 
     @PostMapping("/{id}/categorias/{idCategoria}")
     public ResponseEntity<Void> adicionarCategoria(
-            @PathVariable String id,
-            @PathVariable String idCategoria) {
+            @PathVariable Integer id,
+            @PathVariable Integer idCategoria) {
 
         usuarioService.adicionarCategoria(id, idCategoria);
 
@@ -93,7 +93,7 @@ public class UsuarioController {
 
     @GetMapping("/{id}/categorias")
     public ResponseEntity<ArrayList<Categoria>> buscarCategorias(
-            @PathVariable String id) {
+            @PathVariable Integer id) {
 
         return ResponseEntity.ok(usuarioService.buscarCategorias(id));
     }
@@ -101,8 +101,8 @@ public class UsuarioController {
 
     @DeleteMapping("/{id}/categorias/{idCategoria}")
     public ResponseEntity<Void> removerCategoria(
-            @PathVariable String id,
-            @PathVariable String idCategoria) {
+            @PathVariable Integer id,
+            @PathVariable Integer idCategoria) {
 
         usuarioService.removerCategoria(id, idCategoria);
 
@@ -110,7 +110,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}/recomendacoes")
-    public ResponseEntity<Map<String, Object>> recomendar(@PathVariable String id) {
+    public ResponseEntity<Map<String, Object>> recomendar(@PathVariable Integer id) {
 
         RecomendacaoService recomendacaoService = new RecomendacaoService();
         Map<String, Object> recomendacoes = recomendacaoService.recomendar(id);
@@ -125,8 +125,8 @@ public class UsuarioController {
 
     @PostMapping("/{id}/missoes/{idAcao}")
     public ResponseEntity<Void> iniciarMissao(
-            @PathVariable String id,
-            @PathVariable String idAcao,
+            @PathVariable Integer id,
+            @PathVariable Integer idAcao,
             @RequestParam int progressoTotal) {
 
         UsuarioAcaoStatusService missaoService = new UsuarioAcaoStatusService();
@@ -139,8 +139,8 @@ public class UsuarioController {
 
     @GetMapping("/{id}/missoes/{idAcao}")
     public ResponseEntity<UsuarioAcaoStatus> buscarMissao(
-            @PathVariable String id,
-            @PathVariable String idAcao) {
+            @PathVariable Integer id,
+            @PathVariable Integer idAcao) {
 
         UsuarioAcaoStatusService missaoService = new UsuarioAcaoStatusService();
 
@@ -156,8 +156,8 @@ public class UsuarioController {
 
     @PatchMapping("/{id}/missoes/{idAcao}/progresso")
     public ResponseEntity<Void> atualizarProgresso(
-            @PathVariable String id,
-            @PathVariable String idAcao,
+            @PathVariable Integer id,
+            @PathVariable Integer idAcao,
             @RequestParam int quantidade) {
 
         UsuarioAcaoStatusService missaoService = new UsuarioAcaoStatusService();
@@ -170,7 +170,7 @@ public class UsuarioController {
 
     @GetMapping("/{id}/missoes")
     public ResponseEntity<List<UsuarioAcaoStatus>> listarMissoes(
-            @PathVariable String id) {
+            @PathVariable Integer id) {
 
         UsuarioAcaoStatusService missaoService = new UsuarioAcaoStatusService();
         List<UsuarioAcaoStatus> missoes = missaoService.listarMissoes(id);
@@ -181,7 +181,7 @@ public class UsuarioController {
 
     @GetMapping("/{id}/avatar")
     public ResponseEntity<UsuarioAvatar> buscarAvatar(
-            @PathVariable String id) {
+            @PathVariable Integer id) {
 
         UsuarioAvatarService avatarService = new UsuarioAvatarService();
 
@@ -197,7 +197,7 @@ public class UsuarioController {
 
     @PatchMapping("/{id}/avatar/nivel")
     public ResponseEntity<Void> atualizarNivelAvatar(
-            @PathVariable String id) {
+            @PathVariable Integer id) {
 
         UsuarioAvatarService avatarService = new UsuarioAvatarService();
 
@@ -209,7 +209,7 @@ public class UsuarioController {
 
     @PatchMapping("/{id}/avatar/humor")
     public ResponseEntity<Void> atualizarHumorAvatar(
-            @PathVariable String id,
+            @PathVariable Integer id,
             @RequestBody Map<String, String> dados) {
 
         UsuarioAvatarService avatarService = new UsuarioAvatarService();

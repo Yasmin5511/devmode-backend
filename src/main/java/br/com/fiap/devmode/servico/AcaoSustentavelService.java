@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class AcaoSustentavelService {
 
-    public AcaoSustentavel buscarPorId(String id) {
+    public AcaoSustentavel buscarPorId(Integer id) {
         AcaoSustentavelDAO dao = new AcaoSustentavelDAO();
 
         try {
@@ -39,7 +39,7 @@ public class AcaoSustentavelService {
         }
     }
 
-    public boolean atualizar(String id, AcaoSustentavel acao) {
+    public boolean atualizar(Integer id, AcaoSustentavel acao) {
         validarAcao(acao);
 
         AcaoSustentavelDAO dao = new AcaoSustentavelDAO();
@@ -58,7 +58,7 @@ public class AcaoSustentavelService {
         }
     }
 
-    public boolean remover(String id) {
+    public boolean remover(Integer id) {
         AcaoSustentavelDAO dao = new AcaoSustentavelDAO();
 
         try {
@@ -78,13 +78,12 @@ public class AcaoSustentavelService {
             throw new IllegalArgumentException("A ação é obrigatória.");
         }
 
-        if (acao.getIdAcao() == null || acao.getIdAcao().isBlank()) {
+        if (acao.getIdAcao() == null) {
             throw new IllegalArgumentException("O ID da ação é obrigatório.");
         }
 
         if (acao.getCategoria() == null ||
-                acao.getCategoria().getIdCategoria() == null ||
-                acao.getCategoria().getIdCategoria().isBlank()) {
+                acao.getCategoria().getIdCategoria() == null) {
             throw new IllegalArgumentException("A categoria é obrigatória.");
         }
 

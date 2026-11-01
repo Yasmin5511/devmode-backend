@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
-    private String idUsuario;
+    private Integer idUsuario;
     private String cpf;
     private String email;
     private String nome;
@@ -19,7 +19,7 @@ public class Usuario {
         this.categorias = new ArrayList<>();
     }
 
-    public Usuario(String idUsuario, String cpf, String email, String nome, String sobrenome, int totalPontosSustentaveis, LocalDate dataCriacao) {
+    public Usuario(Integer idUsuario, String cpf, String email, String nome, String sobrenome, int totalPontosSustentaveis, LocalDate dataCriacao) {
         this.idUsuario = idUsuario;
         this.cpf = cpf;
         this.email = email;
@@ -30,8 +30,8 @@ public class Usuario {
         this.categorias = new ArrayList<>();
     }
 
-    public String getIdUsuario() {return idUsuario;}
-    public void setIdUsuario(String idUsuario) {this.idUsuario = idUsuario;}
+    public Integer getIdUsuario() {return idUsuario;}
+    public void setIdUsuario(Integer idUsuario) {this.idUsuario = idUsuario;}
     public String getCpf() {return cpf;}
     public void setCpf(String cpf) {this.cpf = cpf;}
     public String getEmail() {return email;}

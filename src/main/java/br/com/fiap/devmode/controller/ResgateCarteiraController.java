@@ -15,8 +15,8 @@ public class ResgateCarteiraController {
 
     @PostMapping
     public ResponseEntity<Void> solicitarResgate(
-            @RequestParam String idResgate,
-            @RequestParam String idUsuario,
+            @RequestParam Integer idResgate,
+            @RequestParam Integer idUsuario,
             @RequestParam int pontos) {
 
         resgateService.solicitarResgate(idResgate, idUsuario, pontos);
@@ -26,7 +26,7 @@ public class ResgateCarteiraController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ResgateCarteira> buscarPorId(
-            @PathVariable String id) {
+            @PathVariable Integer id) {
 
         ResgateCarteira resgate = resgateService.buscarPorId(id);
 

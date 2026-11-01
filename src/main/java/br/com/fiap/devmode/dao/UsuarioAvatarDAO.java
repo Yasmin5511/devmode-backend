@@ -23,7 +23,7 @@ public class UsuarioAvatarDAO {
             String sqlInsert = "INSERT INTO TB_USUARIO_AVATAR (tb_usuario_id_usuario, tb_nivel_avatar_nivel, humor_avatar) VALUES (?, ?, ?)";
 
             PreparedStatement comandoDeInsercao = conexao.prepareStatement(sqlInsert);
-            comandoDeInsercao.setString(1, usuarioAvatar.getUsuario().getIdUsuario());
+            comandoDeInsercao.setInt(1, usuarioAvatar.getUsuario().getIdUsuario());
             comandoDeInsercao.setInt(2, usuarioAvatar.getNivelAvatar().getNivel());
             comandoDeInsercao.setString(3, usuarioAvatar.getHumorAvatar());
 
@@ -36,20 +36,20 @@ public class UsuarioAvatarDAO {
     }
 
 
-    public UsuarioAvatar buscarPorId(String idUsuario) {
+    public UsuarioAvatar buscarPorId(Integer idUsuario) {
 
         UsuarioAvatar usuarioAvatar = null;
 
         try {
             String sqlSelect = "SELECT * FROM TB_USUARIO_AVATAR WHERE tb_usuario_id_usuario = ?";
             PreparedStatement comandoDeSelecao = conexao.prepareStatement(sqlSelect);
-            comandoDeSelecao.setString(1, idUsuario);
+            comandoDeSelecao.setInt(1, idUsuario);
 
             ResultSet rs = comandoDeSelecao.executeQuery();
 
             if (rs.next()) {
 
-                String idUsuarioBanco = rs.getString("tb_usuario_id_usuario");
+                Integer idUsuarioBanco = rs.getInt("tb_usuario_id_usuario");
                 int nivelBanco = rs.getInt("tb_nivel_avatar_nivel");
 
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -93,7 +93,7 @@ public class UsuarioAvatarDAO {
             while (rs.next()) {
 
                 Usuario usuario = new Usuario();
-                usuario.setIdUsuario(rs.getString("tb_usuario_id_usuario"));
+                usuario.setIdUsuario(rs.getInt("tb_usuario_id_usuario"));
 
                 NivelAvatar nivelAvatar = new NivelAvatar();
                 nivelAvatar.setNivel(rs.getInt("tb_nivel_avatar_nivel"));
@@ -123,7 +123,7 @@ public class UsuarioAvatarDAO {
             PreparedStatement comandoDeAtualizacao = conexao.prepareStatement(sqlUpdate);
             comandoDeAtualizacao.setInt(1, usuarioAvatar.getNivelAvatar().getNivel());
             comandoDeAtualizacao.setString(2, usuarioAvatar.getHumorAvatar());
-            comandoDeAtualizacao.setString(3, usuarioAvatar.getUsuario().getIdUsuario());
+            comandoDeAtualizacao.setInt(3, usuarioAvatar.getUsuario().getIdUsuario());
 
             comandoDeAtualizacao.execute();
             comandoDeAtualizacao.close();
@@ -133,11 +133,11 @@ public class UsuarioAvatarDAO {
         }
     }
 
-    public void remover(String idUsuario) {
+    public void remover(Integer idUsuario) {
         try {
             String sqlDelete = "DELETE FROM TB_USUARIO_AVATAR WHERE tb_usuario_id_usuario = ?";
             PreparedStatement comandoDeRemocao = conexao.prepareStatement(sqlDelete);
-            comandoDeRemocao.setString(1, idUsuario);
+            comandoDeRemocao.setInt(1, idUsuario);
 
             comandoDeRemocao.execute();
             comandoDeRemocao.close();

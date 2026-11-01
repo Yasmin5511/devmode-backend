@@ -18,7 +18,7 @@ public class ConteudoSustentavelService {
         }
     }
 
-    public ConteudoSustentavel buscarPorId(String id) {
+    public ConteudoSustentavel buscarPorId(Integer id) {
 
         ConteudoSustentavelDAO conteudoDAO = new ConteudoSustentavelDAO();
 
@@ -42,7 +42,7 @@ public class ConteudoSustentavelService {
         }
     }
 
-    public boolean atualizar(String id, ConteudoSustentavel conteudo) {
+    public boolean atualizar(Integer id, ConteudoSustentavel conteudo) {
 
         validarConteudo(conteudo);
 
@@ -62,7 +62,7 @@ public class ConteudoSustentavelService {
         }
     }
 
-    public boolean remover(String id) {
+    public boolean remover(Integer id) {
 
         ConteudoSustentavelDAO conteudoDAO = new ConteudoSustentavelDAO();
 
@@ -86,15 +86,13 @@ public class ConteudoSustentavelService {
                     "O conteúdo sustentável é obrigatório.");
         }
 
-        if (conteudo.getIdConteudo() == null ||
-                conteudo.getIdConteudo().isBlank()) {
+        if (conteudo.getIdConteudo() == null) {
             throw new IllegalArgumentException(
                     "O ID do conteúdo é obrigatório.");
         }
 
         if (conteudo.getCategoria() == null ||
-                conteudo.getCategoria().getIdCategoria() == null ||
-                conteudo.getCategoria().getIdCategoria().isBlank()) {
+                conteudo.getCategoria().getIdCategoria() == null) {
             throw new IllegalArgumentException(
                     "A categoria do conteúdo é obrigatória.");
         }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class ResgateCarteiraService {
 
-    public void solicitarResgate(String idResgate, String idUsuario, int pontos) {
+    public void solicitarResgate(Integer idResgate, Integer idUsuario, int pontos) {
 
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         ResgateCarteiraDAO resgateDAO = new ResgateCarteiraDAO();
@@ -21,7 +21,7 @@ public class ResgateCarteiraService {
                 throw new IllegalArgumentException("Usuário não encontrado.");
             }
 
-            if (idResgate == null || idResgate.isBlank()) {
+            if (idResgate == null) {
                 throw new IllegalArgumentException("ID do resgate é obrigatório.");
             }
 
@@ -47,7 +47,7 @@ public class ResgateCarteiraService {
         }
     }
 
-    public ResgateCarteira buscarPorId(String idResgate) {
+    public ResgateCarteira buscarPorId(Integer idResgate) {
         ResgateCarteiraDAO resgateDAO = new ResgateCarteiraDAO();
 
         try {

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class UsuarioAvatarService {
 
-    public UsuarioAvatar buscarPorUsuario(String idUsuario) {
+    public UsuarioAvatar buscarPorUsuario(Integer idUsuario) {
 
         UsuarioAvatarDAO avatarDAO = new UsuarioAvatarDAO();
 
@@ -24,7 +24,7 @@ public class UsuarioAvatarService {
     }
 
 
-    public void criarAvatar(String idUsuario) {
+    public void criarAvatar(Integer idUsuario) {
 
         UsuarioAvatarDAO avatarDAO = new UsuarioAvatarDAO();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -63,7 +63,7 @@ public class UsuarioAvatarService {
     }
 
 
-    public void atualizarNivel(String idUsuario) {
+    public void atualizarNivel(Integer idUsuario) {
 
         UsuarioAvatarDAO avatarDAO = new UsuarioAvatarDAO();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -94,7 +94,7 @@ public class UsuarioAvatarService {
         }
     }
 
-    public void atualizarHumor(String idUsuario, String novoHumor) {
+    public void atualizarHumor(Integer idUsuario, String novoHumor) {
 
         UsuarioAvatarDAO avatarDAO = new UsuarioAvatarDAO();
 

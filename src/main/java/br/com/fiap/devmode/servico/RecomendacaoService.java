@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class RecomendacaoService {
 
-    public Map<String, Object> recomendar(String idUsuario) {
+    public Map<String, Object> recomendar(Integer idUsuario) {
 
         UsuarioService usuarioService = new UsuarioService();
         AcaoSustentavelService acaoService = new AcaoSustentavelService();

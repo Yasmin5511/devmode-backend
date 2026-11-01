@@ -23,8 +23,8 @@ public class ConteudoSustentavelDAO {
 
             PreparedStatement comandoDeInsercao = conexao.prepareStatement(sqlInsert);
 
-            comandoDeInsercao.setString(1, conteudo.getIdConteudo());
-            comandoDeInsercao.setString(2, conteudo.getCategoria().getIdCategoria());
+            comandoDeInsercao.setInt(1, conteudo.getIdConteudo());
+            comandoDeInsercao.setInt(2, conteudo.getCategoria().getIdCategoria());
             comandoDeInsercao.setString(3, conteudo.getTitulo());
             comandoDeInsercao.setString(4, conteudo.getConteudo());
             comandoDeInsercao.setString(5, conteudo.getConteudoAvatar());
@@ -39,7 +39,7 @@ public class ConteudoSustentavelDAO {
         }
     }
 
-    public ConteudoSustentavel buscarPorId(String idConteudo) {
+    public ConteudoSustentavel buscarPorId(Integer idConteudo) {
 
         ConteudoSustentavel conteudo = null;
 
@@ -47,17 +47,17 @@ public class ConteudoSustentavelDAO {
             String sqlSelect = "SELECT * FROM TB_CONTEUDOS_SUSTENTAVEIS WHERE id_conteudo = ?";
 
             PreparedStatement comandoDeSelecao = conexao.prepareStatement(sqlSelect);
-            comandoDeSelecao.setString(1, idConteudo);
+            comandoDeSelecao.setInt(1, idConteudo);
             ResultSet rs = comandoDeSelecao.executeQuery();
 
             if (rs.next()) {
 
                 Categoria categoria = new Categoria();
-                categoria.setIdCategoria(rs.getString("tb_categorias_id_categoria"));
+                categoria.setIdCategoria(rs.getInt("tb_categorias_id_categoria"));
 
                 conteudo = new ConteudoSustentavel();
 
-                conteudo.setIdConteudo(rs.getString("id_conteudo"));
+                conteudo.setIdConteudo(rs.getInt("id_conteudo"));
                 conteudo.setCategoria(categoria);
                 conteudo.setTitulo(rs.getString("titulo"));
                 conteudo.setConteudo(rs.getString("conteudo"));
@@ -88,11 +88,11 @@ public class ConteudoSustentavelDAO {
             while (rs.next()) {
 
                 Categoria categoria = new Categoria();
-                categoria.setIdCategoria(rs.getString("tb_categorias_id_categoria"));
+                categoria.setIdCategoria(rs.getInt("tb_categorias_id_categoria"));
 
                 ConteudoSustentavel conteudo = new ConteudoSustentavel();
 
-                conteudo.setIdConteudo(rs.getString("id_conteudo"));
+                conteudo.setIdConteudo(rs.getInt("id_conteudo"));
                 conteudo.setCategoria(categoria);
                 conteudo.setTitulo(rs.getString("titulo"));
                 conteudo.setConteudo(rs.getString("conteudo"));
@@ -119,13 +119,13 @@ public class ConteudoSustentavelDAO {
 
             PreparedStatement comandoDeAtualizacao = conexao.prepareStatement(sqlUpdate);
 
-            comandoDeAtualizacao.setString(1, conteudo.getCategoria().getIdCategoria());
+            comandoDeAtualizacao.setInt(1, conteudo.getCategoria().getIdCategoria());
             comandoDeAtualizacao.setString(2, conteudo.getTitulo());
             comandoDeAtualizacao.setString(3, conteudo.getConteudo());
             comandoDeAtualizacao.setString(4, conteudo.getConteudoAvatar());
             comandoDeAtualizacao.setString(5, conteudo.getLinkRedirecionamento());
             comandoDeAtualizacao.setInt(6, conteudo.getPontosGanhos());
-            comandoDeAtualizacao.setString(7, conteudo.getIdConteudo());
+            comandoDeAtualizacao.setInt(7, conteudo.getIdConteudo());
 
             comandoDeAtualizacao.execute();
             comandoDeAtualizacao.close();
@@ -135,11 +135,11 @@ public class ConteudoSustentavelDAO {
         }
     }
 
-    public void remover(String idConteudo) {
+    public void remover(Integer idConteudo) {
         try {
             String sqlDelete = "DELETE FROM TB_CONTEUDOS_SUSTENTAVEIS WHERE id_conteudo = ?";
             PreparedStatement comandoDeRemocao = conexao.prepareStatement(sqlDelete);
-            comandoDeRemocao.setString(1, idConteudo);
+            comandoDeRemocao.setInt(1, idConteudo);
 
             comandoDeRemocao.execute();
             comandoDeRemocao.close();

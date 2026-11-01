@@ -3,7 +3,7 @@ package br.com.fiap.devmode.modelo;
 import java.time.LocalDate;
 
 public class ResgateCarteira {
-    private String idResgate;
+    private Integer idResgate;
     private Usuario usuario;
     private int pontosUtilizados;
     private double valorPix;
@@ -13,7 +13,7 @@ public class ResgateCarteira {
     public ResgateCarteira() {
     }
 
-    public ResgateCarteira(String idResgate, Usuario usuario, int pontosUtilizados, double valorPix, String status, LocalDate dataResgate) {
+    public ResgateCarteira(Integer idResgate, Usuario usuario, int pontosUtilizados, double valorPix, String status, LocalDate dataResgate) {
         this.idResgate = idResgate;
         this.usuario = usuario;
         this.pontosUtilizados = pontosUtilizados;
@@ -22,8 +22,8 @@ public class ResgateCarteira {
         this.dataResgate = dataResgate;
     }
 
-    public String getIdResgate() {return idResgate;}
-    public void setIdResgate(String idResgate) {this.idResgate = idResgate;}
+    public Integer getIdResgate() {return idResgate;}
+    public void setIdResgate(Integer idResgate) {this.idResgate = idResgate;}
     public Usuario getUsuario() {return usuario;}
     public void setUsuario(Usuario usuario) {this.usuario = usuario;}
     public int getPontosUtilizados() {return pontosUtilizados;}

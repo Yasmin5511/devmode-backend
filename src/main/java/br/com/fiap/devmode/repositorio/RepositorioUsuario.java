@@ -9,19 +9,19 @@ public interface RepositorioUsuario {
 
     void adicionar(Usuario usuario);
 
-    Usuario buscarPorId(String idUsuario);
+    Usuario buscarPorId(Integer idUsuario);
 
     ArrayList<Usuario> obterTodosUsuarios();
 
     void atualizar(Usuario usuario);
 
-    void remover(String idUsuario);
+    void remover(Integer idUsuario);
 
-    void adicionarCategoria(String idUsuario, String idCategoria);
+    void adicionarCategoria(Integer idUsuario, Integer idCategoria);
 
-    ArrayList<Categoria> buscarCategorias(String idUsuario);
+    ArrayList<Categoria> buscarCategorias(Integer idUsuario);
 
-    void removerCategoria(String idUsuario, String idCategoria);
+    void removerCategoria(Integer idUsuario, Integer idCategoria);
 
     void atualizarPontos(Usuario usuario);
 

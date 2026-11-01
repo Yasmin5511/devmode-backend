@@ -23,8 +23,8 @@ public class AcaoSustentavelDAO {
 
             PreparedStatement comandoDeInsercao = conexao.prepareStatement(sqlInsert);
 
-            comandoDeInsercao.setString(1, acao.getIdAcao());
-            comandoDeInsercao.setString(2, acao.getCategoria().getIdCategoria());
+            comandoDeInsercao.setInt(1, acao.getIdAcao());
+            comandoDeInsercao.setInt(2, acao.getCategoria().getIdCategoria());
             comandoDeInsercao.setString(3, acao.getTitulo());
             comandoDeInsercao.setString(4, acao.getDescricao());
             comandoDeInsercao.setString(5, acao.getConteudoAvatar());
@@ -40,7 +40,7 @@ public class AcaoSustentavelDAO {
         }
     }
 
-    public AcaoSustentavel buscarPorId(String idAcao) {
+    public AcaoSustentavel buscarPorId(Integer idAcao) {
 
         AcaoSustentavel acao = null;
 
@@ -48,17 +48,17 @@ public class AcaoSustentavelDAO {
             String sqlSelect = "SELECT * FROM TB_ACOES_SUSTENTAVEIS WHERE id_acao = ?";
 
             PreparedStatement comandoDeSelecao = conexao.prepareStatement(sqlSelect);
-            comandoDeSelecao.setString(1, idAcao);
+            comandoDeSelecao.setInt(1, idAcao);
             ResultSet rs = comandoDeSelecao.executeQuery();
 
             if (rs.next()) {
 
                 Categoria categoria = new Categoria();
-                categoria.setIdCategoria(rs.getString("tb_categorias_id_categoria"));
+                categoria.setIdCategoria(rs.getInt("tb_categorias_id_categoria"));
 
                 acao = new AcaoSustentavel();
 
-                acao.setIdAcao(rs.getString("id_acao"));
+                acao.setIdAcao(rs.getInt("id_acao"));
                 acao.setCategoria(categoria);
                 acao.setTitulo(rs.getString("titulo"));
                 acao.setDescricao(rs.getString("descricao"));
@@ -90,10 +90,10 @@ public class AcaoSustentavelDAO {
             while (rs.next()) {
 
                 Categoria categoria = new Categoria();
-                categoria.setIdCategoria(rs.getString("tb_categorias_id_categoria"));
+                categoria.setIdCategoria(rs.getInt("tb_categorias_id_categoria"));
 
                 AcaoSustentavel acao = new AcaoSustentavel();
-                acao.setIdAcao(rs.getString("id_acao"));
+                acao.setIdAcao(rs.getInt("id_acao"));
                 acao.setCategoria(categoria);
                 acao.setTitulo(rs.getString("titulo"));
                 acao.setDescricao(rs.getString("descricao"));
@@ -121,14 +121,14 @@ public class AcaoSustentavelDAO {
 
             PreparedStatement comandoDeAtualizacao = conexao.prepareStatement(sqlUpdate);
 
-            comandoDeAtualizacao.setString(1, acao.getCategoria().getIdCategoria());
+            comandoDeAtualizacao.setInt(1, acao.getCategoria().getIdCategoria());
             comandoDeAtualizacao.setString(2, acao.getTitulo());
             comandoDeAtualizacao.setString(3, acao.getDescricao());
             comandoDeAtualizacao.setString(4, acao.getConteudoAvatar());
             comandoDeAtualizacao.setInt(5, acao.getPontosGanhos());
             comandoDeAtualizacao.setDouble(6, acao.getCo2EvitadoKg());
             comandoDeAtualizacao.setString(7, acao.getNivelDificuldade());
-            comandoDeAtualizacao.setString(8, acao.getIdAcao());
+            comandoDeAtualizacao.setInt(8, acao.getIdAcao());
 
             comandoDeAtualizacao.execute();
             comandoDeAtualizacao.close();
@@ -138,13 +138,13 @@ public class AcaoSustentavelDAO {
         }
     }
 
-    public void remover(String idAcao) {
+    public void remover(Integer idAcao) {
         try {
             String sqlDelete = "DELETE FROM TB_ACOES_SUSTENTAVEIS WHERE id_acao = ?";
 
             PreparedStatement comandoDeRemocao = conexao.prepareStatement(sqlDelete);
 
-            comandoDeRemocao.setString(1, idAcao);
+            comandoDeRemocao.setInt(1, idAcao);
             comandoDeRemocao.execute();
             comandoDeRemocao.close();
 

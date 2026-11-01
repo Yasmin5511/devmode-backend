@@ -19,8 +19,8 @@ public class ResgateCarteiraDAO {
             String sqlInsert = "INSERT INTO TB_RESGATE_CARTEIRA (id_resgate, tb_usuario_id_usuario, pontos_utilizados, valor_pix, status, dt_resgate) VALUES (?, ?, ?, ?, ?, ?)";
 
             PreparedStatement comandoDeInsercao = conexao.prepareStatement(sqlInsert);
-            comandoDeInsercao.setString(1, resgate.getIdResgate());
-            comandoDeInsercao.setString(2, resgate.getUsuario().getIdUsuario());
+            comandoDeInsercao.setInt(1, resgate.getIdResgate());
+            comandoDeInsercao.setInt(2, resgate.getUsuario().getIdUsuario());
             comandoDeInsercao.setInt(3, resgate.getPontosUtilizados());
             comandoDeInsercao.setDouble(4, resgate.getValorPix());
             comandoDeInsercao.setString(5, resgate.getStatus());
@@ -34,7 +34,7 @@ public class ResgateCarteiraDAO {
         }
     }
 
-    public ResgateCarteira buscarPorId(String idResgate) {
+    public ResgateCarteira buscarPorId(Integer idResgate) {
 
         ResgateCarteira resgate = null;
 
@@ -42,16 +42,16 @@ public class ResgateCarteiraDAO {
             String sqlSelect = "SELECT * FROM TB_RESGATE_CARTEIRA WHERE id_resgate = ?";
 
             PreparedStatement comandoDeSelecao = conexao.prepareStatement(sqlSelect);
-            comandoDeSelecao.setString(1, idResgate);
+            comandoDeSelecao.setInt(1, idResgate);
             ResultSet rs = comandoDeSelecao.executeQuery();
 
             if (rs.next()) {
 
                 Usuario usuario = new Usuario();
-                usuario.setIdUsuario(rs.getString("tb_usuario_id_usuario"));
+                usuario.setIdUsuario(rs.getInt("tb_usuario_id_usuario"));
 
                 resgate = new ResgateCarteira();
-                resgate.setIdResgate(rs.getString("id_resgate"));
+                resgate.setIdResgate(rs.getInt("id_resgate"));
                 resgate.setUsuario(usuario);
                 resgate.setPontosUtilizados(rs.getInt("pontos_utilizados"));
                 resgate.setValorPix(rs.getDouble("valor_pix"));
@@ -84,10 +84,10 @@ public class ResgateCarteiraDAO {
             while (rs.next()) {
 
                 Usuario usuario = new Usuario();
-                usuario.setIdUsuario(rs.getString("tb_usuario_id_usuario"));
+                usuario.setIdUsuario(rs.getInt("tb_usuario_id_usuario"));
 
                 ResgateCarteira resgate = new ResgateCarteira();
-                resgate.setIdResgate(rs.getString("id_resgate"));
+                resgate.setIdResgate(rs.getInt("id_resgate"));
                 resgate.setUsuario(usuario);
                 resgate.setPontosUtilizados(rs.getInt("pontos_utilizados"));
                 resgate.setValorPix(rs.getDouble("valor_pix"));
@@ -115,12 +115,12 @@ public class ResgateCarteiraDAO {
             String sqlUpdate = "UPDATE TB_RESGATE_CARTEIRA SET tb_usuario_id_usuario = ?, pontos_utilizados = ?, valor_pix = ?, status = ?, dt_resgate = ? WHERE id_resgate = ?";
 
             PreparedStatement comandoDeAtualizacao = conexao.prepareStatement(sqlUpdate);
-            comandoDeAtualizacao.setString(1, resgate.getUsuario().getIdUsuario());
+            comandoDeAtualizacao.setInt(1, resgate.getUsuario().getIdUsuario());
             comandoDeAtualizacao.setInt(2, resgate.getPontosUtilizados());
             comandoDeAtualizacao.setDouble(3, resgate.getValorPix());
             comandoDeAtualizacao.setString(4, resgate.getStatus());
             comandoDeAtualizacao.setDate(5, Date.valueOf(resgate.getDataResgate()));
-            comandoDeAtualizacao.setString(6, resgate.getIdResgate());
+            comandoDeAtualizacao.setInt(6, resgate.getIdResgate());
 
             comandoDeAtualizacao.execute();
             comandoDeAtualizacao.close();
@@ -130,11 +130,11 @@ public class ResgateCarteiraDAO {
         }
     }
 
-    public void remover(String idResgate) {
+    public void remover(Integer idResgate) {
         try {
             String sqlDelete = "DELETE FROM TB_RESGATE_CARTEIRA WHERE id_resgate = ?";
             PreparedStatement comandoDeRemocao = conexao.prepareStatement(sqlDelete);
-            comandoDeRemocao.setString(1, idResgate);
+            comandoDeRemocao.setInt(1, idResgate);
 
             comandoDeRemocao.execute();
             comandoDeRemocao.close();
